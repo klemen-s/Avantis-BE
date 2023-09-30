@@ -6,7 +6,9 @@ const Product = require("../models/Product");
 
 router.get("/get-products", async (req, res, next) => {
   try {
-    const products = await Product.find();
+    const gender = req.query.gender;
+
+    const products = await Product.find({ gender: gender });
 
     res.json({ products: products });
   } catch (error) {

@@ -2,9 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const productSchema = new Schema({
   name: String,
-  price: Number,
+  price: String,
   imageUrl: String,
-  forGender: String,
+  gender: String,
+  size: [String],
 });
 
 module.exports = new model("product", productSchema);
