@@ -2,13 +2,17 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const productRoutes = require("./routes/productRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
 app.use(cors());
+app.use(bodyParser.json());
 
+app.use(userRoutes);
 app.use(productRoutes);
 
 app.use((error, req, res, next) => {
