@@ -8,15 +8,13 @@ const User = require("../models/User");
 
 router.post("/register", async (req, res, next) => {
   try {
-    console.log(req.body);
-
     if (req.body === undefined) {
       const err = new Error("Data missing.");
       err.name = "REQ_ERROR";
       err.statusCode = 404;
       throw err;
-      }
-      
+    }
+
     // Check for duplicate E-Mail
     const email = req.body.email;
 
@@ -61,6 +59,13 @@ router.post("/login", async (req, res, next) => {
   try {
     const clientEmail = req.body.email;
 
+    if (!clientEmail) {
+      const err = new Error("Please fill in the missing fields.");
+      err.name = "INPUT_ERROR";
+      err.statusCode = 404;
+      throw err;
+    }
+
     const dbUser = await User.findOne({ email: clientEmail });
 
     if (!dbUser) {
@@ -84,7 +89,7 @@ router.post("/login", async (req, res, next) => {
       );
     }
 
-    res.json({ jwt: jsonwebtoken });
+    res.json({ jwt: jsonwebtoken, name: dbUser.name });
   } catch (error) {
     next(error);
   }
