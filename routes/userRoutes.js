@@ -59,19 +59,13 @@ router.post("/login", async (req, res, next) => {
   try {
     const clientEmail = req.body.email;
 
-    if (!clientEmail) {
-      const err = new Error("Please fill in the missing fields.");
-      err.name = "INPUT_ERROR";
-      err.statusCode = 404;
-      throw err;
-    }
-
     const dbUser = await User.findOne({ email: clientEmail });
 
     if (!dbUser) {
       const err = new Error("E-Mail does not exist.");
-      err.name = "INPUT_ERROR";
-      err.statusCode = 404;
+      err.name = "AUTH_ERROR";
+      err.type = "EMAIL_ERROR";
+      err.statusCode = 401;
       throw err;
     }
 
@@ -87,6 +81,12 @@ router.post("/login", async (req, res, next) => {
         },
         process.env.PRIVATE_KEY
       );
+    } else {
+      const err = new Error("Incorrect password.");
+      err.name = "AUTH_ERROR";
+      err.type = "PASSWORD_ERROR";
+      err.statusCode = 401;
+      throw err;
     }
 
     res.json({ jwt: jsonwebtoken, name: dbUser.name });

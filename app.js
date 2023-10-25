@@ -17,8 +17,22 @@ app.use(productRoutes);
 
 app.use((error, req, res, next) => {
   const statusCode = error.statusCode;
+  const errorType = error.type;
 
-  res.status(statusCode).json({ message: error.message, name: error.name });
+  switch (errorType) {
+    case "EMAIL_ERROR": {
+      res
+        .status(statusCode)
+        .json({ emailError: error.message, name: error.name });
+    }
+    case "PASSWORD_ERROR": {
+      res
+        .status(statusCode)
+        .json({ passwordError: error.message, name: error.name });
+    }
+    default:
+      res.status(statusCode).json({ message: error.message, name: error.name });
+  }
 });
 
 mongoose
