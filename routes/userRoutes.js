@@ -65,7 +65,7 @@ router.post("/login", async (req, res, next) => {
       const err = new Error("E-Mail does not exist.");
       err.name = "AUTH_ERROR";
       err.type = "EMAIL_ERROR";
-      err.statusCode = 401;
+      err.statusCode = 404;
       throw err;
     }
 
@@ -85,7 +85,7 @@ router.post("/login", async (req, res, next) => {
       const err = new Error("Incorrect password.");
       err.name = "AUTH_ERROR";
       err.type = "PASSWORD_ERROR";
-      err.statusCode = 401;
+      err.statusCode = 404;
       throw err;
     }
 

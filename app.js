@@ -21,17 +21,17 @@ app.use((error, req, res, next) => {
 
   switch (errorType) {
     case "EMAIL_ERROR": {
-      res
+      return res
         .status(statusCode)
         .json({ emailError: error.message, name: error.name });
     }
     case "PASSWORD_ERROR": {
-      res
+      return res
         .status(statusCode)
         .json({ passwordError: error.message, name: error.name });
     }
     default:
-      res.status(statusCode).json({ message: error.message, name: error.name });
+      return res.status(statusCode).json({ message: error.message, name: error.name });
   }
 });
 
@@ -39,7 +39,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyukcbr.mongodb.net/${process.env.MONGO_STORE}`
   )
-  .then((result) => {
+  .then(() => {
     app.listen(8000);
   })
   .catch((error) => {
