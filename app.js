@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 
 const app = express();
 
@@ -14,9 +15,10 @@ app.use(bodyParser.json());
 
 app.use(userRoutes);
 app.use(productRoutes);
+app.use(orderRoutes);
 
 app.use((error, req, res, next) => {
-  const statusCode = error.statusCode;
+  const statusCode = error.statusCode || 500;
   const errorType = error.type;
 
   switch (errorType) {
@@ -31,7 +33,9 @@ app.use((error, req, res, next) => {
         .json({ passwordError: error.message, name: error.name });
     }
     default:
-      return res.status(statusCode).json({ message: error.message, name: error.name });
+      return res
+        .status(statusCode)
+        .json({ message: error.message, name: error.name });
   }
 });
 

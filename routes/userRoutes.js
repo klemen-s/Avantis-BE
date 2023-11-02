@@ -89,7 +89,7 @@ router.post("/login", async (req, res, next) => {
       throw err;
     }
 
-    res.json({ jwt: jsonwebtoken, name: dbUser.name });
+    res.json({ jwt: jsonwebtoken, name: dbUser.name, userId: dbUser._id });
   } catch (error) {
     next(error);
   }
