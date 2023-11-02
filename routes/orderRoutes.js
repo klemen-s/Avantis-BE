@@ -8,8 +8,6 @@ router.post("/post-order", async (req, res, next) => {
     console.log(req.body);
     const orderItems = req.body.orderItems;
 
-    const orderItemsId = orderItems.map((order) => order.id);
-
     const userId = req.body.userId;
 
     if (!orderItems || !userId) {
@@ -19,7 +17,7 @@ router.post("/post-order", async (req, res, next) => {
       throw err;
     }
 
-    const newOrder = new Order({ userId: userId, orderItems: orderItemsId });
+    const newOrder = new Order({ userId: userId, orderItems: orderItems });
     await newOrder.save();
 
     res.json({ message: "Successfully saved order." });
@@ -28,9 +26,10 @@ router.post("/post-order", async (req, res, next) => {
   }
 });
 
-router.get("/get-orders", async (req, res, next) => {
+router.post("/get-orders", async (req, res, next) => {
   try {
     const userId = req.body.userId;
+    console.log(req.body);
 
     if (!userId) {
       const err = new Error("No user with this ID exists.");
@@ -39,7 +38,8 @@ router.get("/get-orders", async (req, res, next) => {
       throw err;
     }
 
-    const orders = await Order.findById(userId).populate("orderItems");
+    const orders = await Order.find({ userId: userId });
+
     console.log(orders);
 
     res.json({ orders: orders });
