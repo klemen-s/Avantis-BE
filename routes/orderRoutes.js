@@ -5,7 +5,6 @@ const Order = require("../models/Order");
 
 router.post("/post-order", async (req, res, next) => {
   try {
-    console.log(req.body);
     const orderItems = req.body.orderItems;
 
     const userId = req.body.userId;
@@ -29,7 +28,6 @@ router.post("/post-order", async (req, res, next) => {
 router.post("/get-orders", async (req, res, next) => {
   try {
     const userId = req.body.userId;
-    console.log(req.body);
 
     if (!userId) {
       const err = new Error("No user with this ID exists.");
@@ -39,8 +37,6 @@ router.post("/get-orders", async (req, res, next) => {
     }
 
     const orders = await Order.find({ userId: userId });
-
-    console.log(orders);
 
     res.json({ orders: orders });
   } catch (error) {

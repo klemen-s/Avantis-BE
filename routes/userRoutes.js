@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -8,7 +7,6 @@ const User = require("../models/User");
 
 router.post("/register", async (req, res, next) => {
   try {
-    console.log(req.body);
     const email = req.body.email;
     const name = req.body.name;
     const password = req.body.password;
@@ -25,19 +23,18 @@ router.post("/register", async (req, res, next) => {
 
     if (dbEmail) {
       const err = new Error("E-Mail already exists.");
-      err.name = "DUPLICATED_ERROR";
+      err.name = "EMAIL_ERROR";
       err.statusCode = 409;
       throw err;
     }
 
     if (password !== confirmPassword) {
       const err = new Error("Passwords do not match.");
-      err.name = "INPUT_ERROR";
+      err.name = "PASSWORD_MATCH_ERROR";
       err.statusCode = 400;
       throw err;
     }
 
-    // hash password
     const hash = await bcrypt.hash(password, 12);
 
     const newUser = new User({
