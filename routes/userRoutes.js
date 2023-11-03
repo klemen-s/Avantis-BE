@@ -8,15 +8,18 @@ const User = require("../models/User");
 
 router.post("/register", async (req, res, next) => {
   try {
-    if (req.body === undefined) {
+    console.log(req.body);
+    const email = req.body.email;
+    const name = req.body.name;
+    const password = req.body.password;
+    const confirmPassword = req.body.confirmPassword;
+
+    if (!name || !email || !password || !confirmPassword) {
       const err = new Error("Data missing.");
-      err.name = "REQ_ERROR";
+      err.name = "INPUT_ERROR";
       err.statusCode = 404;
       throw err;
     }
-
-    // Check for duplicate E-Mail
-    const email = req.body.email;
 
     const dbEmail = await User.findOne({ email: email });
 
@@ -26,10 +29,6 @@ router.post("/register", async (req, res, next) => {
       err.statusCode = 409;
       throw err;
     }
-
-    const name = req.body.name;
-    const password = req.body.password;
-    const confirmPassword = req.body.confirmPassword;
 
     if (password !== confirmPassword) {
       const err = new Error("Passwords do not match.");
