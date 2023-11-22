@@ -52,7 +52,7 @@ router.get("/get-product", async (req, res,next) => {
 
     res.json({ product: product });
   } catch (error) {
-    next(err);
+    next(error);
   }
 });
 
