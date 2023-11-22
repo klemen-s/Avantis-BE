@@ -44,7 +44,7 @@ mongoose
     `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.xyukcbr.mongodb.net/${process.env.MONGO_STORE}`
   )
   .then(() => {
-    app.listen(8000);
+    app.listen(process.env.PORT || 5000);
   })
   .catch((error) => {
     error.name = "CONNECITON_FAILED";
