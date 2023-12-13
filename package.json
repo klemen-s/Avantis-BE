@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\"",
-    "start:dev": "npx nodemon app.js"
+    "start:dev": "npx nodemon app.js",
+    "swagger": "node ./swagger.js"
   },
   "keywords": [],
   "author": "",
@@ -19,9 +20,13 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
     "mongoose": "^7.5.3",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "swagger-ui-express": "^5.0.0"
   },
   "engines": {
     "node": "20.x"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
   }
 }
