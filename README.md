@@ -1,4 +1,4 @@
-# 🛒 E-Commerce App Backend
+# 🛒 Avantis Backend
 
 This repository hosts the backend system that supports the deployed E-Commerce-App-FE (_Avantis_). It provides necessary the API for user authentication, product management, order processing, and more.
 
