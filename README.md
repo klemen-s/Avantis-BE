@@ -1,6 +1,6 @@
 # 🛒 Avantis Backend
 
-This repository hosts the backend system that supports the deployed E-Commerce-App-FE (_Avantis_). It provides necessary the API for user authentication, product management, order processing, and more.
+This repository hosts the backend system that supports **Avantis**. It provides the necessary API for user authentication, product management, order processing, and more.
 
 ## 🚀 Technologies Used
 ![Node.js Badge](https://img.shields.io/badge/Node.js-393?logo=nodedotjs&logoColor=fff&style=for-the-badge)
@@ -22,8 +22,11 @@ The backend provides APIs for the following models:
 
 ## 🌐 Deployed Frontend
 
-The E-Commerce-App-FE (_Avantis_) is already deployed. Access it [here](https://avantis-store.netlify.app/).
+Avantis is already deployed. Access it [here](https://avantis-store.netlify.app/).
 
 ## ℹ️ About
 
-The E-Commerce App Backend provides a robust API layer for the E-Commerce App, which is already deployed. Leveraging Node.js, Express, MongoDB, and other technologies, it facilitates essential functionalities such as user management, product handling, and order processing.
+This backend provides a robust API layer for Avantis. Leveraging Node.js, Express, MongoDB, and other technologies, it facilitates essential functionalities such as user management, product handling, and order processing.
+
+## Other repositories
+### [Avantis](https://github.com/klemen-s/Avantis.git)
